@@ -20,7 +20,7 @@ def get_response(target_prompt):
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=target_prompt,
-        max_tokens=4097,
+        max_tokens=3900,
         temperature=0.05
     )
     return response
