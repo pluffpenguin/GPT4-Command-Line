@@ -20,19 +20,20 @@ def get_response(target_prompt):
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=target_prompt,
-        max_tokens=10000,
+        max_tokens=4097,
         temperature=0.05
     )
     return response
 
-first_prompt = input(f'>>> What would you like to ask?')
+first_prompt = input(f'[?] What would you like to ask? \n>>> ')
 first_response = get_response(first_prompt)
 
 print(first_response["choices"]["text"])
 print_line()
 
+# loop
 while True:
-    prompt = input(f'>>> Continue:')
+    prompt = input(f'[?] Continue: \n>>> ')
     response = get_response(prompt)
     print(response["choices"]["text"])
     print_line()
