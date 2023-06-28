@@ -30,7 +30,7 @@ first_response = get_response(first_prompt)
 
 # print(first_response)
 # print_line()
-print(first_response["choices"][0]["text"])
+print(f'[ RESPONSE ]\n{first_response["choices"][0]["text"]}')
 
 print_line()
 
@@ -38,6 +38,6 @@ print_line()
 while True:
     prompt = input(f'[?] Continue: \n>>> ')
     response = get_response(prompt)
-    print(response["choices"][0]["text"])
+    print(f'[ RESPONSE ]\n{response["choices"][0]["text"]}')
     print_line()
     time.sleep(1)
