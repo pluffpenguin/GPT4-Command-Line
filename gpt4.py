@@ -28,13 +28,16 @@ def get_response(target_prompt):
 first_prompt = input(f'[?] What would you like to ask? \n>>> ')
 first_response = get_response(first_prompt)
 
-print(first_response["choices"]["text"])
+# print(first_response)
+# print_line()
+print(first_response["choices"][0]["text"])
+
 print_line()
 
 # loop
 while True:
     prompt = input(f'[?] Continue: \n>>> ')
     response = get_response(prompt)
-    print(response["choices"]["text"])
+    print(response["choices"][0]["text"])
     print_line()
     time.sleep(1)
