@@ -3,10 +3,11 @@ import openai
 import time
 
 from dotenv import load_dotenv
-from colorama import init
-init()
+from colorama import just_fix_windows_console, Fore, Back, Style
+just_fix_windows_console()
 
 load_dotenv()
+
 ORG_KEY = os.getenv('ORG_KEY')
 API_KEY = os.getenv('API_KEY')
 
@@ -14,30 +15,39 @@ openai.organization = ORG_KEY
 openai.api_key = API_KEY
 
 def print_line():
-    print("\n\n===========================================\n\n")
+    print(Fore.GREEN + "\n\n===========================================\n")
 
 def get_response(target_prompt):
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=target_prompt,
-        max_tokens=3900,
-        temperature=0.05
+    # response = openai.Completion.create(
+    #     model="text-davinci-003",
+    #     prompt=target_prompt,
+    #     max_tokens=3900,
+    #     temperature=0.3
+    # )
+
+    completion = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": target_prompt}
+        ]
     )
-    return response
+
+    # print(completion.choices[0].message)
+
+    return completion
 
 first_prompt = input(f'[?] What would you like to ask? \n>>> ')
-first_response = get_response(first_prompt)
+first_completion = get_response(first_prompt)
 
-# print(first_response)
-# print_line()
-print(f'[ RESPONSE ]\n{first_response["choices"][0]["text"]}')
+print(Fore.CYAN + f'\n[ RESPONSE ]\n{first_completion.choices[0].message.content}')
 
 print_line()
 
 # loop
 while True:
     prompt = input(f'[?] Continue: \n>>> ')
-    response = get_response(prompt)
-    print(f'[ RESPONSE ]\n{response["choices"][0]["text"]}')
+    completion = get_response(prompt)
+    print(Fore.CYAN + f'\n[ RESPONSE ]\n{completion.choices[0].message.content}')
     print_line()
-    time.sleep(1)
+    time.sleep(1/10)
