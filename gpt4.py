@@ -15,7 +15,7 @@ openai.organization = ORG_KEY
 openai.api_key = API_KEY
 
 def print_line():
-    print(Fore.GREEN + "\n\n===========================================\n")
+    print(Fore.YELLOW + "\n\n===========================================" + Fore.WHITE + "\n")
 
 def get_response(target_prompt):
     # response = openai.Completion.create(
@@ -37,7 +37,7 @@ def get_response(target_prompt):
 
     return completion
 
-first_prompt = input(f'[?] What would you like to ask? \n>>> ')
+first_prompt = input(Fore.YELLOW + f'[?] What would you like to ask?' + Fore.WHITE + '\n>>> ')
 first_completion = get_response(first_prompt)
 
 print(Fore.CYAN + f'\n[ RESPONSE ]\n{first_completion.choices[0].message.content}')
@@ -46,8 +46,8 @@ print_line()
 
 # loop
 while True:
-    prompt = input(f'[?] Continue: \n>>> ')
+    prompt = input(Fore.YELLOW + f'[?] Continue: ' + Fore.WHITE + '\n>>> ')
     completion = get_response(prompt)
-    print(Fore.CYAN + f'\n[ RESPONSE ]\n{completion.choices[0].message.content}')
+    print(Fore.YELLOW + f'\n[ RESPONSE ]' + Fore.CYAN + f'\n{completion.choices[0].message.content}')
     print_line()
     time.sleep(1/10)
